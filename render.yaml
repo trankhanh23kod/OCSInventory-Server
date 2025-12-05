@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: ocs-server
+    env: ubuntu
+    buildCommand: |
+      sudo apt-get update
+      sudo apt-get install -y apache2 php php-mysql php-xml php-zip php-gd php-curl php-mbstring php-json php-cli php-common php-intl
+      sudo cp -r . /var/www/html/
+      sudo chown -R www-data:www-data /var/www/html/
+    startCommand: |
+      sudo service apache2 start
+      tail -f /dev/null
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false
+      - key: DB_NAME
+        sync: false
